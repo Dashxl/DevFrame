@@ -68,7 +68,7 @@ export const Hero = () => {
             whileTap={{ scale: 0.95 }}
             className="flex h-14 items-center gap-2 rounded-full bg-secondary px-8 font-semibold text-foreground border border-white/5 transition-all hover:bg-secondary/80"
           >
-            Download Resume <Download size={20} />
+            Download CV <Download size={20} />
           </motion.button>
         </div>
       </motion.div>

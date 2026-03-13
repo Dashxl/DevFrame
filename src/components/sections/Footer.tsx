@@ -6,10 +6,10 @@ import { Github, Linkedin, Twitter, Instagram, Send, ArrowUpRight } from "lucide
 
 export const Footer = () => {
   const socials = [
-    { icon: <Github />, href: "#" },
-    { icon: <Linkedin />, href: "#" },
+    { icon: <Github />, href: "https://github.com/Dashxl" },
+    { icon: <Linkedin />, href: "https://www.linkedin.com/in/dscp-sandro-ramirez/" },
     { icon: <Twitter />, href: "#" },
-    { icon: <Instagram />, href: "#" },
+    { icon: <Instagram />, href: "https://www.instagram.com/dash._.xl/" },
   ];
 
   return (
@@ -27,7 +27,7 @@ export const Footer = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-lg">
               I'm always open to discussing new projects, creative ideas or vision about your digital presence.
             </p>
-            
+
             <motion.a
               href="mailto:contact@example.com"
               whileHover={{ scale: 1.02 }}
