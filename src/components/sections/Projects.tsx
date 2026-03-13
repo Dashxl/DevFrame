@@ -11,6 +11,8 @@ const projects = [
     desc: "Transform legacy code into documented, secured, maintainable software in 30 seconds using Gemini 3's structured reasoning.",
     tags: ["Next.js", "TypeScript", "React", "Tailwind", "Google Gemini 3", "Redis"],
     image: "/Cipher.png",
+    liveUrl: "https://cipherai-app.vercel.app/",
+    repoUrl: "https://github.com/Dashxl/Cipher-AI",
   },
   {
     title: "EcoPulse Dashboard",
@@ -18,6 +20,8 @@ const projects = [
     desc: "Complex data visualization for global environmental monitoring.",
     tags: ["React", "D3.js", "Tailwind"],
     image: "https://images.unsplash.com/photo-1551288049-bbda38a10ad1?q=80&w=2340&auto=format&fit=crop",
+    liveUrl: "#",
+    repoUrl: "#",
   },
   {
     title: "Vivid UI Stack",
@@ -25,6 +29,8 @@ const projects = [
     desc: "Premium design system with highly interactive and accessible components.",
     tags: ["Radix UI", "TypeScript", "SCSS"],
     image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2340&auto=format&fit=crop",
+    liveUrl: "#",
+    repoUrl: "#",
   }
 ];
 
@@ -79,10 +85,20 @@ export const Projects = () => {
                 </div>
 
                 <div className="mt-8 flex gap-4">
-                  <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+                  >
                     <ExternalLink size={18} />
                   </a>
-                  <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-muted-foreground hover:bg-white/10 transition-all">
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-muted-foreground hover:bg-white/10 transition-all"
+                  >
                     <Github size={18} />
                   </a>
                 </div>

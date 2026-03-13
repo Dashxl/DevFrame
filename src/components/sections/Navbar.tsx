@@ -19,26 +19,28 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 transition-all duration-300 px-6 py-4",
-        isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-white/5 py-3" : "bg-transparent"
+        "fixed left-0 right-0 top-0 z-50 transition-all duration-300 px-6 py-4 will-change-[padding,background-color]",
+        isScrolled 
+          ? "bg-background/80 backdrop-blur-md md:backdrop-blur-lg border-b border-white/5 py-3" 
+          : "bg-transparent"
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           className="text-xl font-bold tracking-tighter"
         >
-          <span className="text-primary">PORT</span>FOLIO
+          <span className="text-primary font-black">PORT</span>FOLIO
         </motion.div>
 
         {/* Desktop Nav */}
@@ -47,30 +49,31 @@ export const Navbar = () => {
             <motion.a
               key={item.href}
               href={item.href}
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: idx * 0.05 }}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               {item.name}
             </motion.a>
           ))}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="flex items-center gap-4 border-l border-white/10 pl-8 text-muted-foreground"
           >
-            <a href="#" className="hover:text-primary transition-colors"><Github size={18} /></a>
-            <a href="#" className="hover:text-primary transition-colors"><Linkedin size={18} /></a>
+            <a href="https://github.com/Dashxl" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors"><Github size={18} /></a>
+            <a href="https://www.linkedin.com/in/dscp-sandro-ramirez/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors"><Linkedin size={18} /></a>
           </motion.div>
         </div>
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-foreground"
+          className="md:hidden text-foreground p-2 -mr-2 outline-none focus:ring-0"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle Menu"
         >
-          {mobileMenuOpen ? <X /> : <Menu />}
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
@@ -78,17 +81,18 @@ export const Navbar = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 overflow-hidden rounded-2xl bg-secondary/90 backdrop-blur-xl border border-white/10 p-4"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: "circOut" }}
+            className="md:hidden absolute left-6 right-6 mt-4 p-4 overflow-hidden rounded-2xl bg-secondary/95 backdrop-blur-md border border-white/10 shadow-2xl z-50 will-change-transform"
           >
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-3 text-lg font-medium text-foreground hover:text-primary"
+                className="block py-4 px-2 text-lg font-medium text-foreground hover:text-primary active:bg-white/5 rounded-xl transition-colors"
               >
                 {item.name}
               </a>
@@ -99,3 +103,4 @@ export const Navbar = () => {
     </nav>
   );
 };
+
