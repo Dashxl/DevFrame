@@ -3,6 +3,7 @@ import { ArrowUpRight, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { AppPhones, type AppShot } from "@/components/ui/AppPhones";
 
 type Project = {
   title: string;
@@ -39,24 +40,23 @@ const projects: Project[] = [
   },
 ];
 
-const appRoles = ["Customers", "Restaurants", "Couriers"];
-
-const AppsPreview = () => (
-  <div aria-hidden className="flex h-full items-center justify-center gap-4 sm:gap-8">
-    {appRoles.map((role, i) => (
-      <div key={role} className={cn("flex flex-col items-center gap-3", i === 1 && "-translate-y-3")}>
-        <div className="flex aspect-[9/18] w-[4.5rem] flex-col gap-2 rounded-2xl border border-border bg-background p-2.5 sm:w-24">
-          <div className="mx-auto h-1 w-6 rounded-full bg-border" />
-          <div className={cn("h-10 rounded-md sm:h-14", i === 1 ? "bg-accent" : "bg-border")} />
-          <div className="h-1.5 rounded-full bg-border" />
-          <div className="h-1.5 w-3/4 rounded-full bg-border" />
-          <div className="h-1.5 w-1/2 rounded-full bg-border" />
-        </div>
-        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{role}</span>
-      </div>
-    ))}
-  </div>
-);
+const appShots: AppShot[] = [
+  {
+    name: "Antoja",
+    src: "/antoja/antoja-customers.webp",
+    alt: "Antoja customer app home screen with search, deals and nearby restaurants",
+  },
+  {
+    name: "Antoja Negocios",
+    src: "/antoja/antoja-restaurants.webp",
+    alt: "Antoja Negocios dashboard with today's sales, key figures and an hourly sales chart",
+  },
+  {
+    name: "Antoja Repartidor",
+    src: "/antoja/antoja-couriers.webp",
+    alt: "Antoja Repartidor delivery route on a map with the customer's details",
+  },
+];
 
 const ProjectLinks = ({ project }: { project: Project }) => (
   <div className="flex items-center gap-6 text-sm font-medium">
@@ -110,7 +110,8 @@ export const Work = () => {
               >
                 <div
                   className={cn(
-                    "relative aspect-[3/2] overflow-hidden rounded-md border border-border bg-surface",
+                    "relative overflow-hidden rounded-md border border-border bg-surface",
+                    project.image && "aspect-[3/2]",
                     idx % 2 === 1 && "md:order-last"
                   )}
                 >
@@ -123,7 +124,7 @@ export const Work = () => {
                       className="object-cover"
                     />
                   ) : (
-                    <AppsPreview />
+                    <AppPhones shots={appShots} />
                   )}
                 </div>
 
