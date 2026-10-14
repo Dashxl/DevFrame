@@ -1,84 +1,63 @@
-"use client";
+import { ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
 
-import { motion } from "framer-motion";
-import React from "react";
-import { Github, Linkedin, Twitter, Instagram, Send, ArrowUpRight } from "lucide-react";
+const channels = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/dscp-sandro-ramirez/",
+    icon: <Linkedin size={16} />,
+    primary: true,
+  },
+  { name: "GitHub", href: "https://github.com/Dashxl", icon: <Github size={16} />, primary: false },
+];
 
 export const Footer = () => {
-  const socials = [
-    { icon: <Github />, href: "https://github.com/Dashxl" },
-    { icon: <Linkedin />, href: "https://www.linkedin.com/in/dscp-sandro-ramirez/" },
-    { icon: <Twitter />, href: "#" },
-    { icon: <Instagram />, href: "https://www.instagram.com/dash._.xl/" },
-  ];
-
   return (
-    <footer id="contact" className="relative pt-32 pb-16 px-6 overflow-hidden">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-6xl mb-6">
-              Have a <span className="text-gradient">great idea</span>?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-lg">
-              I'm always open to discussing new projects, creative ideas or vision about your digital presence.
-            </p>
+    <footer id="contact" className="border-t border-border px-6 pb-10 pt-24 md:pt-32">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <p className="label mb-6">
+            <span className="text-accent">03</span>
+            <span className="mx-3 text-border">/</span>
+            Contact
+          </p>
+          <h2 className="display max-w-4xl text-5xl leading-[1.06] md:text-6xl lg:text-7xl">
+            Hiring? <em className="text-accent">Let&apos;s talk.</em>
+          </h2>
+          <p className="mt-8 max-w-xl text-lg text-muted-foreground">
+            I&apos;m looking for a team where I can build web and mobile products end to end. If you have a role or
+            a project in mind, I&apos;d like to hear about it.
+          </p>
 
-            <motion.a
-              href="mailto:contact@example.com"
-              whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center gap-3 text-2xl font-semibold text-primary hover:text-primary/80 transition-colors"
-            >
-              Let's talk <Send size={24} />
-            </motion.a>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="rounded-[2.5rem] border border-white/5 bg-secondary/30 p-12 backdrop-blur-xl"
-          >
-            <div className="mb-8">
-              <h3 className="text-xl font-bold mb-4">Follow me</h3>
-              <div className="flex gap-4">
-                {socials.map((social, idx) => (
-                  <motion.a
-                    key={idx}
-                    href={social.href}
-                    whileHover={{ y: -5, color: "var(--primary)" }}
-                    className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-muted-foreground border border-white/5 transition-colors"
-                  >
-                    {social.icon}
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-4">Location</h3>
-              <p className="text-muted-foreground mb-1 flex items-center gap-2">
-                Working remotely worldwide <ArrowUpRight size={14} className="text-primary" />
-              </p>
-              <p className="text-sm text-white/40">Available 24/7 (GMT+1)</p>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2026 Professional Portfolio. All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-primary">Inspiration</a>
-            <a href="#" className="hover:text-primary">Source</a>
-            <a href="#" className="hover:text-primary">Privacy</a>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            {channels.map((channel) => (
+              <a
+                key={channel.name}
+                href={channel.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={
+                  channel.primary
+                    ? "group inline-flex h-12 items-center gap-2.5 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-85"
+                    : "group inline-flex h-12 items-center gap-2.5 rounded-full border border-border px-6 text-sm font-medium transition-colors hover:border-foreground"
+                }
+              >
+                {channel.icon}
+                {channel.name}
+                <ArrowUpRight
+                  size={15}
+                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
+            ))}
           </div>
+        </Reveal>
+
+        <div className="mt-24 flex flex-col gap-2 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
+          <p>© 2026 Sandro Ramírez</p>
+          <p>Full Stack &amp; Mobile Developer</p>
         </div>
       </div>
     </footer>
   );
 };
-

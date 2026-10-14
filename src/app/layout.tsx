@@ -1,19 +1,34 @@
-import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  style: ["normal", "italic"],
+  variable: "--font-dm-sans",
+});
+
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-dm-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Professional Portfolio | Web Developer & Designer",
-  description: "A premium, production-ready portfolio showcasing high-end web development, immersive animations, and exceptional UX.",
-  keywords: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "Portfolio", "Web Development"],
-  authors: [{ name: "Professional Developer" }],
-  viewport: "width=device-width, initial-scale=1",
+  title: "Sandro Ramírez — Full Stack & Mobile Developer",
+  description:
+    "Full Stack and Mobile Developer building web and mobile products with Flutter, Next.js, TypeScript and Node.js. Open to new opportunities.",
+  keywords: ["Flutter", "Dart", "Next.js", "React", "TypeScript", "Node.js", "Mobile Developer", "Full Stack Developer", "Portfolio"],
+  authors: [{ name: "Sandro Ramírez" }],
 };
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+// Runs before first paint so the page never flashes the wrong theme.
+const themeScript = `(function(){try{var s=localStorage.getItem("theme");var t=s==="light"||s==="dark"?s:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){}})()`;
 
 export default function RootLayout({
   children,
@@ -21,24 +36,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${outfit.variable} font-sans antialiased`}
-      >
-        <div className="relative min-h-screen bg-background">
-          {/* Background effects - Nebula/Mesh style */}
-          <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-            <div className="absolute top-[-10%] left-[-10%] h-[40%] w-[40%] bg-primary/20 blur-[120px] rounded-full animate-pulse" />
-            <div className="absolute bottom-[10%] right-[-5%] h-[50%] w-[50%] bg-accent/15 blur-[120px] rounded-full" />
-            <div className="absolute top-[20%] right-[10%] h-[30%] w-[30%] bg-primary/10 blur-[100px] rounded-full" />
-          </div>
-          <main className="relative z-10">
-            {children}
-          </main>
-        </div>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className={`${dmSans.variable} ${dmMono.variable}`}>
+        <main>{children}</main>
       </body>
     </html>
   );
 }
-
-

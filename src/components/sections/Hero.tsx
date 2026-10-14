@@ -1,91 +1,93 @@
-"use client";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Download, Github, Linkedin, MousePointer2 } from "lucide-react";
-import React from "react";
+const glance = [
+  { label: "Focus", value: "Web & mobile products" },
+  { label: "Core stack", value: "Flutter · Next.js · Node.js" },
+  { label: "Currently", value: "Building Antoja" },
+];
 
 export const Hero = () => {
   return (
-    <section id="hero" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-20">
-      <div className="absolute top-1/2 left-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[120px] rounded-full sm:block hidden" />
+    <section id="top" className="px-6 pb-20 pt-32 md:pb-28 md:pt-44">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid items-center gap-12 md:grid-cols-[1fr_auto] md:gap-16 lg:gap-24">
+          <div>
+            <Reveal>
+              <p className="label mb-8 inline-flex items-center gap-3">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                </span>
+                Open to new opportunities
+              </p>
+            </Reveal>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-center will-change-transform"
-      >
-        {/* Profile Image Container */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="relative mx-auto mb-8 h-28 w-28 md:h-40 md:w-40 will-change-transform"
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary to-accent opacity-20 blur-xl animate-pulse" />
-          <div className="relative h-full w-full overflow-hidden rounded-full border-2 border-white/10 glass shadow-2xl shadow-primary/20">
-            <img
-              src="/profile.png" // <--- Cambia esto por el nombre de tu archivo en /public
-              alt="Profile"
-              className="h-full w-full object-cover transition-all duration-500 hover:scale-105"
-            />
+            <Reveal delay={0.08}>
+              <h1 className="display text-[2.75rem] leading-[1.02] sm:text-6xl md:text-[3.75rem] lg:text-[5.5rem]">
+                <span className="block">Full Stack</span>
+                <span className="block">
+                  and <em className="text-accent">Mobile</em>
+                </span>
+                <span className="block">Developer.</span>
+              </h1>
+            </Reveal>
+
+            <Reveal delay={0.16}>
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                I build web and mobile products end to end with Flutter, Next.js and Node.js, taking features
+                from the database to the screen. Most recently on Antoja, a three-app food delivery platform for
+                Santiago Ixcuintla and Tuxpan, Nayarit.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.24}>
+              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+                <a
+                  href="#contact"
+                  className="group inline-flex h-12 items-center gap-2 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-85"
+                >
+                  Work with me
+                  <ArrowUpRight
+                    size={16}
+                    className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
+                <a href="#work" className="link-underline text-sm font-medium">
+                  See selected work
+                </a>
+              </div>
+            </Reveal>
           </div>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs md:text-sm font-medium text-primary backdrop-blur-md"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-          </span>
-          Available for new projects
-        </motion.div>
-
-        <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-8xl">
-          Designing the <br />
-          <span className="text-gradient">Digital Future</span>
-        </h1>
-
-        <p className="mx-auto mb-10 max-w-2xl text-base md:text-xl text-muted-foreground px-4">
-          I'm a Full Stack Developer specialized in creating exceptional web experiences, combining impeccable design with robust technical architecture.
-        </p>
-
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex h-12 md:h-14 items-center gap-2 rounded-full bg-primary px-6 md:px-8 font-semibold text-primary-foreground transition-all hover:bg-primary/90 will-change-transform"
-          >
-            View Projects <ArrowRight size={20} />
-          </motion.button>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex h-12 md:h-14 items-center gap-2 rounded-full bg-secondary px-6 md:px-8 font-semibold text-foreground border border-white/5 transition-all hover:bg-secondary/80 will-change-transform"
-          >
-            Download CV <Download size={20} />
-          </motion.button>
+          <Reveal delay={0.2} className="order-first md:order-last">
+            <figure className="w-28 sm:w-36 md:w-60 lg:w-80">
+              <div className="relative aspect-square overflow-hidden rounded-full border border-border bg-surface">
+                <Image
+                  src="/profile.png"
+                  alt="Portrait of Sandro Ramírez"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 320px, (min-width: 768px) 240px, 144px"
+                  className="origin-[48%_62%] scale-[1.55] object-cover saturate-[0.85]"
+                />
+              </div>
+            </figure>
+          </Reveal>
         </div>
-      </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-muted-foreground z-0"
-      >
-        <span className="text-[10px] uppercase tracking-widest opacity-50">Scroll to explore</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="h-6 w-px bg-gradient-to-b from-primary/50 to-transparent"
-        />
-      </motion.div>
+        <Reveal delay={0.3}>
+          <dl className="mt-16 grid gap-y-6 border-t border-border pt-8 sm:grid-cols-3 sm:gap-x-8 md:mt-24">
+            {glance.map((item) => (
+              <div key={item.label}>
+                <dt className="label mb-2">{item.label}</dt>
+                <dd className="font-medium">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+      </div>
     </section>
   );
 };
