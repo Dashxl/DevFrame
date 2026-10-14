@@ -10,7 +10,7 @@ const glance = [
 
 export const Hero = () => {
   return (
-    <section id="top" className="px-6 pb-20 pt-32 md:pb-28 md:pt-44">
+    <section id="top" className="px-6 pb-16 pt-28 md:pb-20 md:pt-36">
       <div className="mx-auto max-w-6xl">
         <div className="grid items-center gap-12 md:grid-cols-[1fr_auto] md:gap-16 lg:gap-24">
           <div>
@@ -78,7 +78,7 @@ export const Hero = () => {
         </div>
 
         <Reveal delay={0.3}>
-          <dl className="mt-16 grid gap-y-6 border-t border-border pt-8 sm:grid-cols-3 sm:gap-x-8 md:mt-24">
+          <dl className="mt-12 grid gap-y-6 border-t border-border pt-8 sm:grid-cols-3 sm:gap-x-8 md:mt-16">
             {glance.map((item) => (
               <div key={item.label}>
                 <dt className="label mb-2">{item.label}</dt>

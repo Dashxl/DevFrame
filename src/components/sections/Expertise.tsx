@@ -39,10 +39,10 @@ const technologies = [
 
 export const Expertise = () => {
   return (
-    <section id="expertise" className="border-t border-border px-6 py-24 md:py-32">
+    <section id="expertise" className="border-t border-border px-6 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
-          index="01"
+          index="02"
           label="Expertise"
           title={
             <>
@@ -52,7 +52,7 @@ export const Expertise = () => {
         />
 
         <Reveal>
-          <p className="mb-14 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          <p className="mb-10 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             I&apos;m comfortable owning a feature from the database to the screen: designing the API, building the
             web or mobile client, and shipping it. Flutter and Node.js are my daily tools, and Antoja put them
             to work in a real product with three different kinds of users.
@@ -71,7 +71,7 @@ export const Expertise = () => {
         </dl>
 
         <Reveal>
-          <div className="mt-20 md:mt-28">
+          <div className="mt-14 md:mt-20">
             <h3 className="label mb-8">Languages &amp; technologies</h3>
             <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:gap-x-8 lg:grid-cols-6">
               {technologies.map((tech) => (

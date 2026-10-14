@@ -10,11 +10,11 @@ const channels = [
 
 export const Footer = () => {
   return (
-    <footer id="contact" className="border-t border-border px-6 pb-10 pt-24 md:pt-32">
+    <footer id="contact" className="border-t border-border px-6 pb-10 pt-20 md:pt-24">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <p className="label mb-6">
-            <span className="text-accent">03</span>
+            <span className="text-accent">04</span>
             <span className="mx-3 text-border">/</span>
             Contact
           </p>
@@ -57,7 +57,7 @@ export const Footer = () => {
           </div>
         </Reveal>
 
-        <div className="mt-24 flex flex-col gap-2 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
+        <div className="mt-16 flex flex-col gap-2 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
           <p>© 2026 Sandro Ramírez</p>
           <p>Full Stack &amp; Mobile Developer</p>
         </div>

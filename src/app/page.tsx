@@ -2,6 +2,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Expertise } from "@/components/sections/Expertise";
 import { Work } from "@/components/sections/Work";
+import { Experience } from "@/components/sections/Experience";
 import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
     <div className="flex flex-col">
       <Navbar />
       <Hero />
+      <Experience />
       <Expertise />
       <Work />
       <Footer />

@@ -94,10 +94,10 @@ const ProjectLinks = ({ project }: { project: Project }) => (
 
 export const Work = () => {
   return (
-    <section id="work" className="border-t border-border px-6 py-24 md:py-32">
+    <section id="work" className="border-t border-border px-6 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
-          index="02"
+          index="03"
           label="Selected work"
           title={
             <>
@@ -106,7 +106,7 @@ export const Work = () => {
           }
         />
 
-        <div className="space-y-20 md:space-y-28">
+        <div className="space-y-16 md:space-y-20">
           {projects.map((project, idx) => (
             <Reveal key={project.title}>
               <article

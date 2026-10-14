@@ -7,7 +7,7 @@ type SectionHeaderProps = {
 };
 
 export const SectionHeader = ({ index, label, title }: SectionHeaderProps) => (
-  <div className="mb-12 md:mb-16">
+  <div className="mb-8 md:mb-12">
     <p className="label mb-5">
       <span className="text-accent">{index}</span>
       <span className="mx-3 text-border">/</span>
