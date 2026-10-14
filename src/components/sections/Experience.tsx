@@ -12,7 +12,7 @@ type Position = {
 
 const positions: Position[] = [
   {
-    company: "Honda",
+    company: "Honda Avante",
     location: "Tepic, Nayarit",
     role: "Internship, Development department",
     period: "May – August 2025",
