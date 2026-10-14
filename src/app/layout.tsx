@@ -14,10 +14,28 @@ const dmMono = DM_Mono({
   variable: "--font-dm-mono",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dev-frame.vercel.app";
+const title = "Sandro Ramírez — Full Stack & Mobile Developer";
+const description =
+  "Full Stack and Mobile Developer building web and mobile products with Flutter, Next.js, TypeScript and Node.js. Open to new opportunities.";
+
 export const metadata: Metadata = {
-  title: "Sandro Ramírez — Full Stack & Mobile Developer",
-  description:
-    "Full Stack and Mobile Developer building web and mobile products with Flutter, Next.js, TypeScript and Node.js. Open to new opportunities.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Sandro Ramírez",
+    title,
+    description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
   keywords: ["Flutter", "Dart", "Next.js", "React", "TypeScript", "Node.js", "Mobile Developer", "Full Stack Developer", "Portfolio"],
   authors: [{ name: "Sandro Ramírez" }],
 };
