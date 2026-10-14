@@ -12,11 +12,11 @@ const areas = [
   },
   {
     name: "Backend & Data",
-    desc: "APIs and relational data models that the clients can rely on.",
+    desc: "APIs, relational data models and third-party integrations such as payments and push notifications.",
   },
   {
     name: "Interface Design",
-    desc: "Interfaces designed in Figma and built with component libraries.",
+    desc: "UI and UX designed in Figma and built with component libraries.",
   },
   {
     name: "Cloud & Delivery",
@@ -34,6 +34,7 @@ const technologies = [
   { group: "Interface", items: ["Tailwind CSS", "shadcn/ui", "Framer Motion", "daisyUI", "Bootstrap", "Figma"] },
   { group: "Databases", items: ["PostgreSQL", "MySQL"] },
   { group: "Cloud", items: ["Vercel", "Google Cloud"] },
+  { group: "Integrations", items: ["Mercado Pago", "Firebase", "Google APIs"] },
 ];
 
 export const Expertise = () => {
@@ -72,7 +73,7 @@ export const Expertise = () => {
         <Reveal>
           <div className="mt-20 md:mt-28">
             <h3 className="label mb-8">Languages &amp; technologies</h3>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:gap-x-8 lg:grid-cols-5">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:gap-x-8 lg:grid-cols-6">
               {technologies.map((tech) => (
                 <div key={tech.group}>
                   <p className="mb-4 border-b border-border pb-3 text-sm font-medium">{tech.group}</p>

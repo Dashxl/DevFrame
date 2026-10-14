@@ -37,7 +37,7 @@ export const Hero = () => {
             <Reveal delay={0.16}>
               <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
                 I build web and mobile products end to end with Flutter, Next.js and Node.js, taking features
-                from the database to the screen. Most recently on Antoja, a three-app food delivery platform for
+                from the database to the screen. Most recently as founder and lead of Antoja, a three-app food delivery platform for
                 Santiago Ixcuintla and Tuxpan, Nayarit.
               </p>
             </Reveal>

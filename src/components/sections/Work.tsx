@@ -10,6 +10,7 @@ type Project = {
   category: string;
   role: string;
   desc: string;
+  highlights?: string[];
   tags: string[];
   image?: string;
   liveUrl?: string;
@@ -21,9 +22,15 @@ const projects: Project[] = [
   {
     title: "Antoja",
     category: "Mobile · Marketplace",
-    role: "Lead developer",
+    role: "Founder & project lead",
     desc: "Food delivery platform for Santiago Ixcuintla and Tuxpan, Nayarit, the first service of its kind in both towns. Three Flutter apps (for customers, restaurants and couriers) share one codebase and a Node.js backend.",
-    tags: ["Flutter", "Dart", "Node.js"],
+    highlights: [
+      "Came up with the idea and lead the project end to end",
+      "Designed the UI and UX of all three apps",
+      "Integrated Google APIs and Firebase push notifications",
+      "Built online payments with Mercado Pago",
+    ],
+    tags: ["Flutter", "Dart", "Node.js", "Firebase", "Mercado Pago", "Google APIs"],
     liveUrl: "https://antoja.com.mx",
     liveLabel: "Visit site",
   },
@@ -137,6 +144,16 @@ export const Work = () => {
                   <h3 className="display text-3xl md:text-4xl">{project.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">Role: {project.role}</p>
                   <p className="mt-5 leading-relaxed text-muted-foreground">{project.desc}</p>
+                  {project.highlights && (
+                    <ul className="mt-6 space-y-2.5 text-sm">
+                      {project.highlights.map((item) => (
+                        <li key={item} className="flex gap-3">
+                          <span aria-hidden className="mt-[0.55rem] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                   <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-1.5 font-mono text-xs text-muted-foreground">
                     {project.tags.map((tag) => (
                       <li key={tag}>{tag}</li>
