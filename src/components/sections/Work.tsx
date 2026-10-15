@@ -31,90 +31,174 @@ const getProjects = (lang: Lang): Project[] => {
   const antojaShots: AppShot[] = [
     {
       name: "Antoja",
-      headline: t("Thousands of cravings near you", "Miles de antojos cerca de ti"),
-      src: "/antoja/antoja-customers-phone.webp",
-      alt: t(
-        "Antoja customer app home screen with search, deals and nearby restaurants",
-        "Pantalla de inicio de la app Antoja para clientes con búsqueda, ofertas y restaurantes cercanos"
-      ),
+      slides: [
+        {
+          headline: t("Thousands of cravings near you", "Miles de antojos cerca de ti"),
+          src: "/antoja/antoja-customer-home.webp",
+          alt: t(
+            "Antoja customer app home screen with search, deals and nearby restaurants",
+            "Pantalla de inicio de la app Antoja para clientes con búsqueda, ofertas y restaurantes cercanos"
+          ),
+        },
+        {
+          headline: t("Track your order in real time", "Sigue tu pedido en tiempo real"),
+          src: "/antoja/antoja-customer-tracking.webp",
+          alt: t(
+            "Antoja order tracking on a map with the delivery status and the pickup code",
+            "Seguimiento de un pedido de Antoja en el mapa con su estado y el código de entrega"
+          ),
+        },
+        {
+          headline: t("Your whole history in one place", "Todo tu historial en un lugar"),
+          src: "/antoja/antoja-customer-orders.webp",
+          alt: t(
+            "Antoja list of in-progress orders with their status and total",
+            "Lista de pedidos en curso de Antoja con su estado y total"
+          ),
+        },
+      ],
     },
     {
       name: "Antoja Negocios",
-      headline: t("Your business, in real time", "Tu negocio, en tiempo real"),
-      src: "/antoja/antoja-restaurants-phone.webp",
-      alt: t(
-        "Antoja Negocios dashboard with today's sales, key figures and an hourly sales chart",
-        "Panel de Antoja Negocios con las ventas de hoy, cifras clave y una gráfica de ventas por hora"
-      ),
+      slides: [
+        {
+          headline: t("Your business, in real time", "Tu negocio, en tiempo real"),
+          src: "/antoja/antoja-business-home.webp",
+          alt: t(
+            "Antoja Negocios dashboard with today's sales, key figures and an hourly sales chart",
+            "Panel de Antoja Negocios con las ventas de hoy, cifras clave y una gráfica de ventas por hora"
+          ),
+        },
+        {
+          headline: t("Manage your orders instantly", "Administra tus pedidos al instante"),
+          src: "/antoja/antoja-business-orders.webp",
+          alt: t(
+            "Antoja Negocios orders list with status filters and a button to mark each order ready",
+            "Lista de pedidos de Antoja Negocios con filtros por estado y un botón para marcar cada pedido como listo"
+          ),
+        },
+        {
+          headline: t("Track your sales day by day", "Mide tus ventas día a día"),
+          src: "/antoja/antoja-business-reports.webp",
+          alt: t(
+            "Antoja Negocios weekly report with income, a daily bar chart and the amount owed",
+            "Reporte semanal de Antoja Negocios con ingresos, una gráfica diaria de barras y el saldo a pagar"
+          ),
+        },
+      ],
     },
     {
       name: "Antoja Repartidor",
-      headline: t("Clear deliveries, route in hand", "Entregas claras, ruta en mano"),
-      src: "/antoja/antoja-couriers-phone.webp",
-      alt: t(
-        "Antoja Repartidor delivery route on a map with the customer's details",
-        "Ruta de entrega de Antoja Repartidor en un mapa con los datos del cliente"
-      ),
+      slides: [
+        {
+          headline: t("Clear deliveries, route in hand", "Entregas claras, ruta en mano"),
+          src: "/antoja/antoja-courier-route.webp",
+          alt: t(
+            "Antoja Repartidor delivery route on a map with the customer's details",
+            "Ruta de entrega de Antoja Repartidor en un mapa con los datos del cliente"
+          ),
+        },
+        {
+          headline: t("See what you earn every week", "Mira lo que ganas cada semana"),
+          src: "/antoja/antoja-courier-earnings.webp",
+          alt: t(
+            "Antoja Repartidor earnings screen with the weekly total and a daily chart",
+            "Pantalla de ganancias de Antoja Repartidor con el total semanal y una gráfica diaria"
+          ),
+        },
+        {
+          headline: t("You set your own pace", "Tú manejas tu ritmo"),
+          src: "/antoja/antoja-courier-profile.webp",
+          alt: t(
+            "Antoja Repartidor profile with deliveries, rating, vehicle and balance",
+            "Perfil de Antoja Repartidor con entregas, calificación, vehículo y saldo"
+          ),
+        },
+      ],
     },
   ];
 
   const armonyxShots: AppShot[] = [
     {
       name: t("Home", "Inicio"),
-      headline: t("Your neighborhood, without the chaos", "Tu fraccionamiento, sin caos"),
-      src: "/armonyx/armonyx-resident-home-phone.webp",
-      alt: t(
-        "ArmonyX resident app home with the active house, its incident reports with risk scores and recent visitor access",
-        "Inicio de la app de residentes de ArmonyX con la casa activa, sus reportes de incidentes con nivel de riesgo y los accesos recientes de visitantes"
-      ),
+      slides: [
+        {
+          headline: t("Your neighborhood, without the chaos", "Tu fraccionamiento, sin caos"),
+          src: "/armonyx/armonyx-resident-home-phone.webp",
+          alt: t(
+            "ArmonyX resident app home with the active house, its incident reports with risk scores and recent visitor access",
+            "Inicio de la app de residentes de ArmonyX con la casa activa, sus reportes de incidentes con nivel de riesgo y los accesos recientes de visitantes"
+          ),
+        },
+      ],
     },
     {
       name: t("Community map", "Mapa de la comunidad"),
-      headline: t("Your community, on the map", "Tu comunidad, en el mapa"),
-      src: "/armonyx/armonyx-resident-map-phone.webp",
-      alt: t(
-        "ArmonyX interactive map of Las Fincas Residencial with the resident's house highlighted and amenities marked",
-        "Mapa interactivo de ArmonyX de Las Fincas Residencial con la casa del residente resaltada y las amenidades marcadas"
-      ),
+      slides: [
+        {
+          headline: t("Your community, on the map", "Tu comunidad, en el mapa"),
+          src: "/armonyx/armonyx-resident-map-phone.webp",
+          alt: t(
+            "ArmonyX interactive map of Las Fincas Residencial with the resident's house highlighted and amenities marked",
+            "Mapa interactivo de ArmonyX de Las Fincas Residencial con la casa del residente resaltada y las amenidades marcadas"
+          ),
+        },
+      ],
     },
     {
       name: t("QR access", "Acceso con QR"),
-      headline: t("Secure access with a QR", "Acceso seguro con un QR"),
-      src: "/armonyx/armonyx-resident-qr-phone.webp",
-      alt: t(
-        "ArmonyX visitor QR code with its remaining validity, visitor name and destination house",
-        "Código QR de visitante de ArmonyX con su vigencia restante, el nombre del visitante y la casa de destino"
-      ),
+      slides: [
+        {
+          headline: t("Secure access with a QR", "Acceso seguro con un QR"),
+          src: "/armonyx/armonyx-resident-qr-phone.webp",
+          alt: t(
+            "ArmonyX visitor QR code with its remaining validity, visitor name and destination house",
+            "Código QR de visitante de ArmonyX con su vigencia restante, el nombre del visitante y la casa de destino"
+          ),
+        },
+      ],
     },
   ];
 
   const civixShots: AppShot[] = [
     {
       name: t("Neighborhood risk", "Riesgo en la colonia"),
-      headline: t("Your neighborhood's risk, today", "Riesgo de tu colonia, hoy"),
-      src: "/civix/civix-citizen-home-phone.webp",
-      alt: t(
-        "CiviX citizen app home showing the neighborhood risk index, the zone card and nearby reports with their risk",
-        "Inicio de la app ciudadana de CiviX con el índice de riesgo de la colonia, la tarjeta de la zona y los reportes cercanos con su riesgo"
-      ),
+      slides: [
+        {
+          headline: t("Your neighborhood's risk, today", "Riesgo de tu colonia, hoy"),
+          src: "/civix/civix-citizen-home-phone.webp",
+          alt: t(
+            "CiviX citizen app home showing the neighborhood risk index, the zone card and nearby reports with their risk",
+            "Inicio de la app ciudadana de CiviX con el índice de riesgo de la colonia, la tarjeta de la zona y los reportes cercanos con su riesgo"
+          ),
+        },
+      ],
     },
     {
       name: t("Risk heat map", "Mapa de calor"),
-      headline: t("Heat map of urban risk", "Mapa de calor de riesgo"),
-      src: "/civix/civix-citizen-map-phone.webp",
-      alt: t(
-        "CiviX dark map of Tepic with reports as points on a risk heat map, zone indexes and category filters",
-        "Mapa oscuro de CiviX de Tepic con los reportes como puntos sobre un mapa de calor de riesgo, índices por zona y filtros por categoría"
-      ),
+      slides: [
+        {
+          headline: t("Heat map of urban risk", "Mapa de calor de riesgo"),
+          src: "/civix/civix-citizen-map-phone.webp",
+          alt: t(
+            "CiviX dark map of Tepic with reports as points on a risk heat map, zone indexes and category filters",
+            "Mapa oscuro de CiviX de Tepic con los reportes como puntos sobre un mapa de calor de riesgo, índices por zona y filtros por categoría"
+          ),
+        },
+      ],
     },
     {
       name: t("Risk estimate", "Estimación de riesgo"),
-      headline: t("Reports ranked by risk", "Reportes priorizados por riesgo"),
-      src: "/civix/civix-citizen-report-phone.webp",
-      alt: t(
-        "CiviX report confirmation screen with the automatic risk analysis showing the estimated level and its confidence",
-        "Pantalla de confirmación de un reporte en CiviX con el análisis automático de riesgo, el nivel estimado y su confianza"
-      ),
+      slides: [
+        {
+          headline: t("Reports ranked by risk", "Reportes priorizados por riesgo"),
+          src: "/civix/civix-citizen-report-phone.webp",
+          alt: t(
+            "CiviX report confirmation screen with the automatic risk analysis showing the estimated level and its confidence",
+            "Pantalla de confirmación de un reporte en CiviX con el análisis automático de riesgo, el nivel estimado y su confianza"
+          ),
+        },
+      ],
     },
   ];
 
