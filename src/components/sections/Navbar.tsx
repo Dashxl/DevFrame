@@ -4,15 +4,18 @@ import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { LanguageToggle } from "@/components/ui/LanguageToggle";
+import { useLang } from "@/lib/i18n";
 
 const navItems = [
-  { name: "Experience", href: "#experience" },
-  { name: "Expertise", href: "#expertise" },
-  { name: "Work", href: "#work" },
-  { name: "Contact", href: "#contact" },
+  { en: "Experience", es: "Experiencia", href: "#experience" },
+  { en: "Expertise", es: "Especialidades", href: "#expertise" },
+  { en: "Work", es: "Proyectos", href: "#work" },
+  { en: "Contact", es: "Contacto", href: "#contact" },
 ];
 
 export const Navbar = () => {
+  const { t } = useLang();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -48,16 +51,19 @@ export const Navbar = () => {
                   href={item.href}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  {item.name}
+                  {t(item.en, item.es)}
                 </a>
               </li>
             ))}
           </ul>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
+            <ThemeToggle />
+          </div>
           <button
             className="-mr-2 p-2 md:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileMenuOpen ? t("Close menu", "Cerrar menú") : t("Open menu", "Abrir menú")}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
           >
@@ -75,7 +81,7 @@ export const Navbar = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-4 display text-3xl"
               >
-                {item.name}
+                {t(item.en, item.es)}
               </a>
             </li>
           ))}

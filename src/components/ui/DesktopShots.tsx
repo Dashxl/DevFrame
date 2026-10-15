@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/lib/i18n";
 
 export type DesktopShot = { name: string; light: string; dark: string; alt: string };
 
@@ -14,6 +15,7 @@ export const DesktopShots = ({ shots, url }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
   const reduce = useReducedMotion();
+  const { t } = useLang();
   const [active, setActive] = useState(0);
   const shot = shots[active];
 
@@ -67,7 +69,7 @@ export const DesktopShots = ({ shots, url }: Props) => {
         </div>
       </motion.div>
 
-      <div role="tablist" aria-label="Cipher-AI screens" className="mt-5 flex justify-center gap-2">
+      <div role="tablist" aria-label={t("Cipher-AI screens", "Pantallas de Cipher-AI")} className="mt-5 flex justify-center gap-2">
         {shots.map((s, i) => (
           <button
             key={s.name}

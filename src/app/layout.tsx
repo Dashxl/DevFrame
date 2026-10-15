@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/lib/i18n";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -59,7 +60,9 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${dmSans.variable} ${dmMono.variable}`}>
-        <main>{children}</main>
+        <LanguageProvider>
+          <main>{children}</main>
+        </LanguageProvider>
       </body>
     </html>
   );

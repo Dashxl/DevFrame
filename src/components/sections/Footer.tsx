@@ -1,6 +1,9 @@
+"use client";
+
 import { ArrowUpRight, Github, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Gengar } from "@/components/ui/Gengar";
+import { useLang } from "@/lib/i18n";
 
 const EMAIL = "sandro.ramirez.1102@gmail.com";
 
@@ -12,6 +15,8 @@ const channels = [
 ];
 
 export const Footer = () => {
+  const { t } = useLang();
+
   return (
     <footer id="contact" className="border-t border-border px-6 pb-10 pt-20 md:pt-24">
       <div className="mx-auto max-w-6xl">
@@ -20,14 +25,23 @@ export const Footer = () => {
             <p className="label mb-6">
               <span className="text-accent">04</span>
               <span className="mx-3 text-border">/</span>
-              Contact
+              {t("Contact", "Contacto")}
             </p>
             <h2 className="display max-w-4xl text-5xl leading-[1.06] md:text-6xl lg:text-7xl">
-              Hiring? <em className="text-accent">Let&apos;s talk.</em>
+              {t(
+                <>
+                  Hiring? <em className="text-accent">Let&apos;s talk.</em>
+                </>,
+                <>
+                  ¿Contratando? <em className="text-accent">Hablemos.</em>
+                </>
+              )}
             </h2>
             <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-              I&apos;m looking for a team where I can build web and mobile products end to end. If you have a role or
-              a project in mind, I&apos;d like to hear about it.
+              {t(
+                "I'm looking for a team where I can build web and mobile products end to end. If you have a role or a project in mind, I'd like to hear about it.",
+                "Busco un equipo donde pueda construir productos web y móviles de principio a fin. Si tienes un puesto o un proyecto en mente, me encantaría escucharlo."
+              )}
             </p>
 
             <a
@@ -67,7 +81,7 @@ export const Footer = () => {
 
         <div className="mt-16 flex flex-col gap-2 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
           <p>© 2026 Sandro Ramírez</p>
-          <p>Full Stack &amp; Mobile Developer</p>
+          <p>{t("Full Stack & Mobile Developer", "Desarrollador Full Stack y Móvil")}</p>
         </div>
       </div>
     </footer>
