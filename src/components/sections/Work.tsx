@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { AppPhones, type AppShot } from "@/components/ui/AppPhones";
+import { DesktopShots, type DesktopShot } from "@/components/ui/DesktopShots";
 
 type Project = {
   title: string;
@@ -14,9 +15,11 @@ type Project = {
   tags: string[];
   image?: string;
   shots?: AppShot[];
+  desktopShots?: DesktopShot[];
   liveUrl?: string;
   liveLabel?: string;
   repoUrl?: string;
+  event?: { name: string; url: string };
 };
 
 const antojaShots: AppShot[] = [
@@ -70,6 +73,21 @@ const civixShots: AppShot[] = [
     name: "Risk estimate",
     src: "/civix/civix-citizen-report.webp",
     alt: "CiviX report confirmation screen with the automatic risk analysis showing the estimated level and its confidence",
+  },
+];
+
+const cipherShots: DesktopShot[] = [
+  {
+    name: "Landing",
+    light: "/cipher/cipher-landing-light.webp",
+    dark: "/cipher/cipher-landing-dark.webp",
+    alt: "Cipher AI landing page with the tagline Crack the code, decipher your legacy",
+  },
+  {
+    name: "Upload",
+    light: "/cipher/cipher-upload-light.webp",
+    dark: "/cipher/cipher-upload-dark.webp",
+    alt: "Cipher AI upload screen to analyze a ZIP file or a public GitHub repository",
   },
 ];
 
@@ -128,10 +146,11 @@ const projects: Project[] = [
     role: "Developer",
     desc: "Transform legacy code into documented, secured, maintainable software in 30 seconds using Gemini 3's structured reasoning.",
     tags: ["Next.js", "TypeScript", "React", "Tailwind", "Google Gemini 3", "Redis"],
-    image: "/Cipher.png",
+    desktopShots: cipherShots,
     liveUrl: "https://cipherai-app.vercel.app/",
     liveLabel: "Live site",
     repoUrl: "https://github.com/Dashxl/Cipher-AI",
+    event: { name: "Gemini 3 Hackathon", url: "https://gemini3.devpost.com/" },
   },
 ];
 
@@ -194,6 +213,8 @@ export const Work = () => {
                 >
                   {project.shots ? (
                     <AppPhones shots={project.shots} />
+                  ) : project.desktopShots ? (
+                    <DesktopShots shots={project.desktopShots} url="cipherai-app.vercel.app" />
                   ) : project.image ? (
                     <Image
                       src={project.image}
@@ -213,6 +234,19 @@ export const Work = () => {
                   </p>
                   <h3 className="display text-3xl md:text-4xl">{project.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">Role: {project.role}</p>
+                  {project.event && (
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Built for the{" "}
+                      <a
+                        href={project.event.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-underline inline-flex items-center gap-1 font-medium text-foreground"
+                      >
+                        {project.event.name} <ArrowUpRight size={13} />
+                      </a>
+                    </p>
+                  )}
                   <p className="mt-5 leading-relaxed text-muted-foreground">{project.desc}</p>
                   {project.highlights && (
                     <ul className="mt-6 space-y-2.5 text-sm">
