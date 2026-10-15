@@ -41,14 +41,14 @@ export const Footer = () => {
               />
             </a>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
               {channels.map((channel) => (
                 <a
                   key={channel.name}
                   href={channel.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex h-12 items-center gap-2.5 rounded-full border border-border px-6 text-sm font-medium transition-colors hover:border-foreground"
+                  className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-full border border-border px-4 text-sm font-medium transition-colors hover:border-foreground sm:justify-start sm:px-6"
                 >
                   {channel.icon}
                   {channel.name}
@@ -60,7 +60,7 @@ export const Footer = () => {
               ))}
             </div>
           </Reveal>
-          <Reveal delay={0.15} className="lg:justify-self-end">
+          <Reveal delay={0.15} className="justify-self-center lg:justify-self-end">
             <Gengar />
           </Reveal>
         </div>
