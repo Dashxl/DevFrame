@@ -19,7 +19,7 @@ type Project = {
   liveUrl?: string;
   liveLabel?: string;
   repoUrl?: string;
-  event?: { name: string; url: string };
+  event?: string;
 };
 
 const antojaShots: AppShot[] = [
@@ -150,7 +150,7 @@ const projects: Project[] = [
     liveUrl: "https://cipherai-app.vercel.app/",
     liveLabel: "Live site",
     repoUrl: "https://github.com/Dashxl/Cipher-AI",
-    event: { name: "Gemini 3 Hackathon", url: "https://gemini3.devpost.com/" },
+    event: "Gemini 3 Hackathon",
   },
 ];
 
@@ -235,17 +235,7 @@ export const Work = () => {
                   <h3 className="display text-3xl md:text-4xl">{project.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">Role: {project.role}</p>
                   {project.event && (
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      Built for the{" "}
-                      <a
-                        href={project.event.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="link-underline inline-flex items-center gap-1 font-medium text-foreground"
-                      >
-                        {project.event.name} <ArrowUpRight size={13} />
-                      </a>
-                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">Built for the {project.event}</p>
                   )}
                   <p className="mt-5 leading-relaxed text-muted-foreground">{project.desc}</p>
                   {project.highlights && (
