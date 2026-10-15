@@ -19,6 +19,20 @@ const positions: Position[] = [
   },
 ];
 
+const education = {
+  school: "Universidad Tecnológica de la Costa",
+  degrees: [
+    {
+      name: "Software Development and Management Engineering",
+      status: "In progress · expected April 2027",
+    },
+    {
+      name: "TSU in Information Technologies, Multiplatform Software Development",
+      status: "Completed",
+    },
+  ],
+};
+
 export const Experience = () => {
   return (
     <section id="experience" className="border-t border-border px-6 py-16 md:py-20">
@@ -61,6 +75,27 @@ export const Experience = () => {
               </article>
             </Reveal>
           ))}
+        </div>
+
+        <div className="mt-14 md:mt-16">
+          <Reveal>
+            <h3 className="label mb-6">Education</h3>
+          </Reveal>
+          <div className="border-t border-border">
+            <Reveal>
+              <article className="grid gap-3 border-b border-border py-6 md:grid-cols-[1fr_1.4fr] md:gap-12 md:py-8">
+                <h4 className="display text-2xl md:text-3xl">{education.school}</h4>
+                <ul className="space-y-5">
+                  {education.degrees.map((degree) => (
+                    <li key={degree.name}>
+                      <p className="text-lg font-medium tracking-tight">{degree.name}</p>
+                      <p className="label mt-2">{degree.status}</p>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
