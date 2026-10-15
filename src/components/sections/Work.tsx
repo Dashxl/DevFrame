@@ -55,6 +55,24 @@ const armonyxShots: AppShot[] = [
   },
 ];
 
+const civixShots: AppShot[] = [
+  {
+    name: "Neighborhood risk",
+    src: "/civix/civix-citizen-home.webp",
+    alt: "CiviX citizen app home showing the neighborhood risk index, the zone card and nearby reports with their risk",
+  },
+  {
+    name: "Risk heat map",
+    src: "/civix/civix-citizen-map.webp",
+    alt: "CiviX dark map of Tepic with reports as points on a risk heat map, zone indexes and category filters",
+  },
+  {
+    name: "Risk estimate",
+    src: "/civix/civix-citizen-report.webp",
+    alt: "CiviX report confirmation screen with the automatic risk analysis showing the estimated level and its confidence",
+  },
+];
+
 const projects: Project[] = [
   {
     title: "Antoja",
@@ -88,6 +106,21 @@ const projects: Project[] = [
     shots: armonyxShots,
     liveUrl: "https://armony-x.vercel.app",
     liveLabel: "Visit site",
+  },
+  {
+    title: "CiviX",
+    category: "Civic tech · Urban risk intelligence",
+    role: "Tech lead & backend developer",
+    desc: "A progressive web app that turns citizen reports into territorial intelligence. Every report gets a transparent urban risk index, so municipal teams attend what is most critical first, not what arrived last.",
+    highlights: [
+      "Accredited to the national ExpoCiencias 2026 in Monterrey after the Nayarit state fair",
+      "Led the technical direction and designed the interfaces",
+      "Transparent urban risk index that ranks reports by impact, not by date",
+      "Duplicate detection that merges nearby reports and lets neighbors add support",
+      "Admin heat map and crisis simulator, with real-time updates over Socket.IO and Web Push",
+    ],
+    tags: ["Next.js", "TypeScript", "Express", "Prisma", "PostgreSQL", "Leaflet", "Socket.IO", "PWA"],
+    shots: civixShots,
   },
   {
     title: "Cipher-AI",
@@ -196,9 +229,11 @@ export const Work = () => {
                       <li key={tag}>{tag}</li>
                     ))}
                   </ul>
-                  <div className="mt-8">
-                    <ProjectLinks project={project} />
-                  </div>
+                  {(project.liveUrl || project.repoUrl) && (
+                    <div className="mt-8">
+                      <ProjectLinks project={project} />
+                    </div>
+                  )}
                 </div>
               </article>
             </Reveal>
