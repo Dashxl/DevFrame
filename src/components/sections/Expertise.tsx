@@ -31,7 +31,7 @@ const areas = [
 const technologies = [
   { group: "Languages", items: ["JavaScript", "TypeScript", "Dart", "PHP"] },
   { group: "Frameworks", items: ["Flutter", "React", "Next.js", "Node.js", "Express", "Angular", "Laravel"] },
-  { group: "Interface", items: ["Tailwind CSS", "shadcn/ui", "Framer Motion", "daisyUI", "Bootstrap", "Figma"] },
+  { group: "Interface", items: ["Tailwind CSS", "shadcn/ui", "Framer Motion", "Bootstrap", "Figma"] },
   { group: "Databases", items: ["PostgreSQL", "MySQL", "Prisma"] },
   { group: "Cloud", items: ["Vercel", "Google Cloud"] },
   { group: "Integrations", items: ["Mercado Pago", "Firebase", "Google APIs"] },
