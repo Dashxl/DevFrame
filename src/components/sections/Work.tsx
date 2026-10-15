@@ -91,6 +91,21 @@ const projects: Project[] = [
     liveLabel: "Visit site",
   },
   {
+    title: "CiviX",
+    category: "Civic tech · Urban risk intelligence",
+    role: "Tech lead & backend developer",
+    desc: "A progressive web app that turns citizen reports into territorial intelligence. Every report gets a transparent urban risk index, so municipal teams attend what is most critical first, not what arrived last.",
+    highlights: [
+      "Accredited to the national ExpoCiencias 2026 in Monterrey after the Nayarit state fair",
+      "Led the technical direction and designed the interfaces",
+      "Transparent urban risk index that ranks reports by impact, not by date",
+      "Duplicate detection that merges nearby reports and lets neighbors add support",
+      "Admin heat map and crisis simulator, with real-time updates over Socket.IO and Web Push",
+    ],
+    tags: ["Next.js", "TypeScript", "Express", "Prisma", "PostgreSQL", "Leaflet", "Socket.IO", "PWA"],
+    shots: civixShots,
+  },
+  {
     title: "ArmonyX",
     category: "SaaS · Residential communities",
     role: "Tech lead & backend developer",
@@ -106,21 +121,6 @@ const projects: Project[] = [
     shots: armonyxShots,
     liveUrl: "https://armony-x.vercel.app",
     liveLabel: "Visit site",
-  },
-  {
-    title: "CiviX",
-    category: "Civic tech · Urban risk intelligence",
-    role: "Tech lead & backend developer",
-    desc: "A progressive web app that turns citizen reports into territorial intelligence. Every report gets a transparent urban risk index, so municipal teams attend what is most critical first, not what arrived last.",
-    highlights: [
-      "Accredited to the national ExpoCiencias 2026 in Monterrey after the Nayarit state fair",
-      "Led the technical direction and designed the interfaces",
-      "Transparent urban risk index that ranks reports by impact, not by date",
-      "Duplicate detection that merges nearby reports and lets neighbors add support",
-      "Admin heat map and crisis simulator, with real-time updates over Socket.IO and Web Push",
-    ],
-    tags: ["Next.js", "TypeScript", "Express", "Prisma", "PostgreSQL", "Leaflet", "Socket.IO", "PWA"],
-    shots: civixShots,
   },
   {
     title: "Cipher-AI",
