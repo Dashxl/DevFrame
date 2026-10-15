@@ -40,17 +40,17 @@ const antojaShots: AppShot[] = [
 const armonyxShots: AppShot[] = [
   {
     name: "Home",
-    src: "/armonyx/armonyx-home.webp",
+    src: "/armonyx/armonyx-resident-home.webp",
     alt: "ArmonyX resident app home with the active house, its incident reports with risk scores and recent visitor access",
   },
   {
     name: "Community map",
-    src: "/armonyx/armonyx-map.webp",
+    src: "/armonyx/armonyx-resident-map.webp",
     alt: "ArmonyX interactive map of Las Fincas Residencial with the resident's house highlighted and amenities marked",
   },
   {
     name: "QR access",
-    src: "/armonyx/armonyx-qr.webp",
+    src: "/armonyx/armonyx-resident-qr.webp",
     alt: "ArmonyX visitor QR code with its remaining validity, visitor name and destination house",
   },
 ];
