@@ -78,6 +78,7 @@ const projects: Project[] = [
     role: "Tech lead & backend developer",
     desc: "A platform for managing private residential communities in Mexico. Administrators, residents and guards work on the same real-time system instead of WhatsApp groups, paper logs and spreadsheets.",
     highlights: [
+      "Led the technical direction and designed the interfaces",
       "Incident reports with photo and map pin, validated by AI and scored for risk",
       "QR access for visitors and couriers, scanned by guards at the gate",
       "Multi-tenant Express and PostgreSQL backend with real-time updates over Socket.IO",
