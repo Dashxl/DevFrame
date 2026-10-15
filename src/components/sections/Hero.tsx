@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 const glance = [
   { label: "Focus", value: "Web & mobile products" },
   { label: "Core stack", value: "Flutter · Next.js · Node.js" },
-  { label: "Currently", value: "Building Antoja" },
+  { label: "Currently", value: "Building Antoja & ArmonyX" },
 ];
 
 export const Hero = () => {

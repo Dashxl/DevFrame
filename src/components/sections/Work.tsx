@@ -13,41 +13,13 @@ type Project = {
   highlights?: string[];
   tags: string[];
   image?: string;
+  shots?: AppShot[];
   liveUrl?: string;
   liveLabel?: string;
   repoUrl?: string;
 };
 
-const projects: Project[] = [
-  {
-    title: "Antoja",
-    category: "Mobile · Marketplace",
-    role: "Founder & project lead",
-    desc: "Food delivery platform for Santiago Ixcuintla and Tuxpan, Nayarit, the first service of its kind in both towns. Three Flutter apps (for customers, restaurants and couriers) share one codebase and a Node.js backend.",
-    highlights: [
-      "Came up with the idea and lead the project end to end",
-      "Designed the UI and UX of all three apps",
-      "Integrated Google APIs and Firebase push notifications",
-      "Built online payments with Mercado Pago",
-    ],
-    tags: ["Flutter", "Dart", "Node.js", "Firebase", "Mercado Pago", "Google APIs"],
-    liveUrl: "https://antoja.com.mx",
-    liveLabel: "Visit site",
-  },
-  {
-    title: "Cipher-AI",
-    category: "Artificial Intelligence · Web",
-    role: "Developer",
-    desc: "Transform legacy code into documented, secured, maintainable software in 30 seconds using Gemini 3's structured reasoning.",
-    tags: ["Next.js", "TypeScript", "React", "Tailwind", "Google Gemini 3", "Redis"],
-    image: "/Cipher.png",
-    liveUrl: "https://cipherai-app.vercel.app/",
-    liveLabel: "Live site",
-    repoUrl: "https://github.com/Dashxl/Cipher-AI",
-  },
-];
-
-const appShots: AppShot[] = [
+const antojaShots: AppShot[] = [
   {
     name: "Antoja",
     src: "/antoja/antoja-customers.webp",
@@ -62,6 +34,70 @@ const appShots: AppShot[] = [
     name: "Antoja Repartidor",
     src: "/antoja/antoja-couriers.webp",
     alt: "Antoja Repartidor delivery route on a map with the customer's details",
+  },
+];
+
+const armonyxShots: AppShot[] = [
+  {
+    name: "Home",
+    src: "/armonyx/armonyx-home.webp",
+    alt: "ArmonyX resident app home with the active house, its incident reports with risk scores and recent visitor access",
+  },
+  {
+    name: "Community map",
+    src: "/armonyx/armonyx-map.webp",
+    alt: "ArmonyX interactive map of Las Fincas Residencial with the resident's house highlighted and amenities marked",
+  },
+  {
+    name: "QR access",
+    src: "/armonyx/armonyx-qr.webp",
+    alt: "ArmonyX visitor QR code with its remaining validity, visitor name and destination house",
+  },
+];
+
+const projects: Project[] = [
+  {
+    title: "Antoja",
+    category: "Mobile · Marketplace",
+    role: "Founder & project lead",
+    desc: "Food delivery platform for Santiago Ixcuintla and Tuxpan, Nayarit, the first service of its kind in both towns. Three Flutter apps (for customers, restaurants and couriers) share one codebase and a Node.js backend.",
+    highlights: [
+      "Came up with the idea and lead the project end to end",
+      "Designed the UI and UX of all three apps",
+      "Integrated Google APIs and Firebase push notifications",
+      "Built online payments with Mercado Pago",
+    ],
+    tags: ["Flutter", "Dart", "Node.js", "Firebase", "Mercado Pago", "Google APIs"],
+    shots: antojaShots,
+    liveUrl: "https://antoja.com.mx",
+    liveLabel: "Visit site",
+  },
+  {
+    title: "ArmonyX",
+    category: "SaaS · Residential communities",
+    role: "Tech lead & backend developer",
+    desc: "A platform for managing private residential communities in Mexico. Administrators, residents and guards work on the same real-time system instead of WhatsApp groups, paper logs and spreadsheets.",
+    highlights: [
+      "Incident reports with photo and map pin, validated by AI and scored for risk",
+      "QR access for visitors and couriers, scanned by guards at the gate",
+      "Multi-tenant Express and PostgreSQL backend with real-time updates over Socket.IO",
+      "Interactive map of the community built with MapLibre GL",
+    ],
+    tags: ["Next.js", "TypeScript", "Express", "Prisma", "PostgreSQL", "Socket.IO", "MapLibre GL"],
+    shots: armonyxShots,
+    liveUrl: "https://armony-x.vercel.app",
+    liveLabel: "Visit site",
+  },
+  {
+    title: "Cipher-AI",
+    category: "Artificial Intelligence · Web",
+    role: "Developer",
+    desc: "Transform legacy code into documented, secured, maintainable software in 30 seconds using Gemini 3's structured reasoning.",
+    tags: ["Next.js", "TypeScript", "React", "Tailwind", "Google Gemini 3", "Redis"],
+    image: "/Cipher.png",
+    liveUrl: "https://cipherai-app.vercel.app/",
+    liveLabel: "Live site",
+    repoUrl: "https://github.com/Dashxl/Cipher-AI",
   },
 ];
 
@@ -122,7 +158,9 @@ export const Work = () => {
                     idx % 2 === 1 && "md:order-last"
                   )}
                 >
-                  {project.image ? (
+                  {project.shots ? (
+                    <AppPhones shots={project.shots} />
+                  ) : project.image ? (
                     <Image
                       src={project.image}
                       alt={`${project.title} preview`}
@@ -130,9 +168,7 @@ export const Work = () => {
                       sizes="(min-width: 768px) 55vw, 100vw"
                       className="object-cover"
                     />
-                  ) : (
-                    <AppPhones shots={appShots} />
-                  )}
+                  ) : null}
                 </div>
 
                 <div>
