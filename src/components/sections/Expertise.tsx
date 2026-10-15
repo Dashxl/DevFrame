@@ -37,6 +37,33 @@ const technologies = [
   { group: "Integrations", items: ["Mercado Pago", "Firebase", "Google APIs"] },
 ];
 
+const strengths = [
+  {
+    name: "Leadership",
+    desc: "Led Antoja from the first idea and acted as technical lead on ArmonyX and CiviX.",
+  },
+  {
+    name: "Ownership",
+    desc: "Takes a feature from the database to the screen and stays with it until it ships.",
+  },
+  {
+    name: "Product mindset",
+    desc: "Starts from the user's problem and designs the interface before writing the code.",
+  },
+  {
+    name: "Fast learner",
+    desc: "Moves between Flutter, Next.js, Node.js and AI APIs and becomes productive quickly.",
+  },
+  {
+    name: "Teamwork",
+    desc: "Comfortable in a development team, as at Honda Avante, and good at explaining technical decisions.",
+  },
+  {
+    name: "Under pressure",
+    desc: "Delivers on tight deadlines: a hackathon build and a state science fair that led to a national stage.",
+  },
+];
+
 export const Expertise = () => {
   return (
     <section id="expertise" className="border-t border-border px-6 py-20 md:py-24">
@@ -87,6 +114,25 @@ export const Expertise = () => {
             </div>
           </div>
         </Reveal>
+
+        <div className="mt-14 md:mt-20">
+          <Reveal>
+            <h3 className="label mb-8">Strengths</h3>
+          </Reveal>
+          <ul className="grid border-t border-border sm:grid-cols-2 sm:gap-x-12 lg:grid-cols-3">
+            {strengths.map((item, idx) => (
+              <li key={item.name} className="border-b border-border">
+                <Reveal delay={idx * 0.04} className="py-6">
+                  <p className="flex items-center gap-3 text-lg font-medium tracking-tight">
+                    <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    {item.name}
+                  </p>
+                  <p className="mt-2 text-muted-foreground">{item.desc}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
