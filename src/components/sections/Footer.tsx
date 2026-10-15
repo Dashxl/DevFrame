@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { ArrowUpRight, Github, Instagram, Linkedin, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Gengar } from "@/components/ui/Gengar";
 
@@ -7,6 +7,8 @@ const EMAIL = "sandro.ramirez.1102@gmail.com";
 const channels = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/dscp-sandro-ramirez/", icon: <Linkedin size={16} /> },
   { name: "GitHub", href: "https://github.com/Dashxl", icon: <Github size={16} /> },
+  { name: "Instagram", href: "https://www.instagram.com/dash._.xl/", icon: <Instagram size={16} /> },
+  { name: "WhatsApp", href: "https://wa.me/523231025480", icon: <MessageCircle size={16} /> },
 ];
 
 export const Footer = () => {
