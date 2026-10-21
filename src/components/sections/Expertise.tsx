@@ -50,7 +50,7 @@ export const Expertise = () => {
   ];
 
   const technologies = [
-    { group: t("Languages", "Lenguajes"), items: ["JavaScript", "TypeScript", "Dart", "PHP"] },
+    { group: t("Languages", "Lenguajes"), items: ["JavaScript", "TypeScript", "Dart", "Kotlin", "PHP"] },
     { group: "Frameworks", items: ["Flutter", "React", "Next.js", "Node.js", "Express", "Angular", "Laravel"] },
     { group: t("Interface", "Interfaz"), items: ["Tailwind CSS", "shadcn/ui", "Framer Motion", "Bootstrap", "Figma"] },
     { group: t("Databases", "Bases de datos"), items: ["PostgreSQL", "MySQL", "Prisma"] },
