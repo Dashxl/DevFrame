@@ -1,8 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Pause, Play, RotateCcw } from "lucide-react";
-import { useLang } from "@/lib/i18n";
 import { PORTRAIT, PORTRAIT_STROKE } from "@/components/ui/avatarPaths";
 import { LOGO_VIEWBOX, WORDMARK_LINE_1, WORDMARK_LINE_2 } from "@/components/ui/logoIntroPaths";
 
@@ -30,10 +28,7 @@ const clamp = (v: number) => Math.min(1, Math.max(0, v));
 const ease = (v: number) => 0.5 - 0.5 * Math.cos(Math.PI * clamp(v));
 
 export const LogoIntro = () => {
-  const { t } = useLang();
   const [done, setDone] = useState(false);
-  const [paused, setPaused] = useState(false);
-  const [reduced, setReduced] = useState(false);
 
   const rootRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -44,8 +39,7 @@ export const LogoIntro = () => {
 
   // The clock lives in refs so the animation loop never re-renders React.
   const clock = useRef({ elapsed: 0, last: null as number | null, raf: 0 });
-  const gates = useRef({ paused: false, hidden: false, offscreen: false, reduced: false });
-  const syncRef = useRef<() => void>(() => {});
+  const gates = useRef({ hidden: false, offscreen: false, reduced: false });
 
   const render = useCallback((time: number) => {
     strokeRefs.current.forEach((path, i) => {
@@ -98,19 +92,17 @@ export const LogoIntro = () => {
     };
 
     const sync = () => {
-      const running = !state.paused && !state.hidden && !state.offscreen && !state.reduced;
+      const running = !state.hidden && !state.offscreen && !state.reduced;
       cancelAnimationFrame(time.raf);
       time.last = null;
       if (running) time.raf = requestAnimationFrame(frame);
     };
-    syncRef.current = sync;
 
     const reducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let holdTimer: number | undefined;
 
     const applyReduced = () => {
       state.reduced = reducedQuery.matches;
-      setReduced(state.reduced);
       window.clearTimeout(holdTimer);
       if (state.reduced) {
         // Show the finished logo for a moment, then continue to the page.
@@ -161,20 +153,6 @@ export const LogoIntro = () => {
     if (done) document.documentElement.style.overflow = "";
   }, [done]);
 
-  const togglePause = () => {
-    gates.current.paused = !gates.current.paused;
-    setPaused(gates.current.paused);
-    syncRef.current();
-  };
-
-  const replay = () => {
-    clock.current.elapsed = 0;
-    gates.current.paused = false;
-    setPaused(false);
-    render(0);
-    syncRef.current();
-  };
-
   if (done) return null;
 
   const stroke = (index: number) => (
@@ -189,9 +167,6 @@ export const LogoIntro = () => {
       style={{ strokeDasharray: 1, strokeDashoffset: 1, strokeOpacity: 0 }}
     />
   );
-
-  const controlClass =
-    "grid h-9 w-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground disabled:pointer-events-none disabled:opacity-40";
 
   return (
     <div
@@ -232,34 +207,6 @@ export const LogoIntro = () => {
           </g>
         </g>
       </svg>
-
-      <div className="absolute bottom-6 right-6 flex items-center gap-2">
-        <button
-          type="button"
-          onClick={togglePause}
-          disabled={reduced}
-          aria-label={paused ? t("Play animation", "Reproducir animación") : t("Pause animation", "Pausar animación")}
-          className={controlClass}
-        >
-          {paused ? <Play size={15} aria-hidden /> : <Pause size={15} aria-hidden />}
-        </button>
-        <button
-          type="button"
-          onClick={replay}
-          disabled={reduced}
-          aria-label={t("Replay animation", "Repetir animación")}
-          className={controlClass}
-        >
-          <RotateCcw size={15} aria-hidden />
-        </button>
-        <button
-          type="button"
-          onClick={finish}
-          className="h-9 rounded-full border border-border px-4 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
-        >
-          {t("Skip", "Saltar")}
-        </button>
-      </div>
     </div>
   );
 };
