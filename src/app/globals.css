@@ -91,3 +91,8 @@
     scroll-behavior: auto;
   }
 }
+
+/* Set by an inline script in <head> once the intro has played in this session. */
+html[data-intro="seen"] [data-logo-intro] {
+  display: none;
+}

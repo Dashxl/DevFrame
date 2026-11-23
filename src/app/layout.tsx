@@ -49,6 +49,9 @@ export const viewport: Viewport = {
 // Runs before first paint so the page never flashes the wrong theme.
 const themeScript = `(function(){try{var s=localStorage.getItem("theme");var t=s==="light"||s==="dark"?s:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t}catch(e){}})()`;
 
+// The logo intro plays once per session; this hides it before paint on later visits so it never flashes.
+const introScript = `(function(){try{if(sessionStorage.getItem("intro-seen"))document.documentElement.dataset.intro="seen"}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -58,6 +61,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+        <noscript>
+          <style>{`[data-logo-intro]{display:none}`}</style>
+        </noscript>
       </head>
       <body className={`${dmSans.variable} ${dmMono.variable}`}>
         <LanguageProvider>
