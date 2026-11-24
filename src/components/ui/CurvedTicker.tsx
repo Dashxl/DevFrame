@@ -12,7 +12,9 @@ const FONT_SIZE = 86;
 const LETTER_SPACING = 2;
 const BASELINE = 33;
 const BADGE_RADIUS = 50;
-const SLOT = "      "; // six preserved spaces: the gap each badge sits in
+// The gap each badge sits in, in path units. It is a number rather than blank characters, so it cannot be changed
+// by how a browser collapses or measures white space.
+const SLOT_UNITS = 170;
 
 // Motion: path units per second at speed 1, the resting speed, and how scrolling bends it.
 const UNITS_PER_SECOND = 120;
@@ -27,7 +29,6 @@ const textStyle = {
   fontWeight: 700,
   fontSize: FONT_SIZE,
   letterSpacing: LETTER_SPACING,
-  whiteSpace: "pre",
 } as const;
 
 type Props = {
@@ -37,19 +38,18 @@ type Props = {
   label: string;
 };
 
-// A ribbon of text on an SVG textPath that glides along a curve at constant speed in path units. Badges sit in
-// the gaps between repetitions, placed from measured path coordinates and turned to the path's tangent.
-// Scrolling the page speeds the ribbon up, or reverses it when scrolling up.
+// A ribbon of text on an SVG textPath that glides along a curve at constant speed in path units. Every repetition
+// is its own short textPath, placed by its own startOffset, with a badge in the gap before the next one. The badge
+// sits at measured path coordinates and turns to the path's tangent. Scrolling the page speeds the ribbon up, or
+// reverses it when scrolling up.
 export const CurvedTicker = ({ message, label }: Props) => {
   const { t } = useLang();
   const pathId = `ticker-${useId().replace(/:/g, "")}`;
-  const phrase = `${message}${SLOT}`;
 
   const rootRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
-  const measureRef = useRef<SVGTextElement>(null);
-  const textPathRef = useRef<SVGTextPathElement>(null);
-  const textRef = useRef<SVGTextElement>(null);
+  const textRefs = useRef<(SVGTextElement | null)[]>([]);
+  const textPathRefs = useRef<(SVGTextPathElement | null)[]>([]);
   const badgeRefs = useRef<(SVGGElement | null)[]>([]);
 
   const [repeats, setRepeats] = useState(3);
@@ -66,9 +66,7 @@ export const CurvedTicker = ({ message, label }: Props) => {
   useEffect(() => {
     const root = rootRef.current;
     const path = pathRef.current;
-    const measure = measureRef.current;
-    const textPath = textPathRef.current;
-    if (!root || !path || !measure || !textPath) return;
+    if (!root || !path) return;
 
     const state = gates.current;
     let disposed = false;
@@ -83,8 +81,10 @@ export const CurvedTicker = ({ message, label }: Props) => {
     const place = () => {
       const { period, slotAt, total, repeats: count } = layout.current;
       const start = -period - positiveMod(offset, period);
-      textPath.setAttribute("startOffset", String(start));
       for (let i = 0; i < count; i++) {
+        textPathRefs.current[i]?.setAttribute("startOffset", String(start + i * period));
+        const text = textRefs.current[i];
+        if (state.ready && text && text.style.opacity !== "1") text.style.opacity = "1";
         const badge = badgeRefs.current[i];
         if (!badge) continue;
         const at = start + i * period + slotAt;
@@ -157,21 +157,43 @@ export const CurvedTicker = ({ message, label }: Props) => {
     document.addEventListener("visibilitychange", onVisibility);
     reducedQuery.addEventListener("change", onReduced);
 
-    // Text is measured only once the font is ready, so the period and the badge slot are exact.
-    void document.fonts.ready.then(() => {
-      if (disposed) return;
-      const period = measure.getSubStringLength(0, phrase.length);
-      const prefix = measure.getSubStringLength(0, message.length);
+    // The phrase is measured as the browser actually draws it on the path, so the gap and the badge always agree
+    // with the letters. It runs again whenever a font finishes loading, since a late font changes the width.
+    // Engines disagree on whether the computed length includes letter spacing, so the end of the last glyph is
+    // located on the path itself and the computed length is only the fallback.
+    const phraseWidth = (textPath: SVGTextPathElement) => {
+      const computed = textPath.getComputedTextLength();
+      const chars = textPath.getNumberOfChars();
+      // Once the ribbon is moving, its first phrase has left the start of the path and cannot be located reliably.
+      const start = parseFloat(textPath.getAttribute("startOffset") ?? "0");
+      if (!computed || !chars || start !== 0) return computed;
+      const end = textPath.getEndPositionOfChar(chars - 1);
+      let best = computed;
+      let bestDistance = Infinity;
+      for (let at = computed * 0.8; at <= computed * 1.2; at += 1) {
+        const point = path.getPointAtLength(at);
+        const distance = Math.hypot(point.x - end.x, point.y - end.y);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = at;
+        }
+      }
+      // Trust the geometry only when the end position really sits on, or a line's width from, the path.
+      return bestDistance < BASELINE * 2 ? best : computed;
+    };
+    const measure = () => {
+      if (disposed) return false;
+      const first = textPathRefs.current[0];
+      const width = first ? phraseWidth(first) : 0;
       const total = path.getTotalLength();
-      if (!period || !total) return;
-      layout.current = {
-        period,
-        slotAt: prefix + (period - prefix) / 2,
-        total,
-        repeats: Math.ceil(total / period) + 2,
-      };
+      if (!width || !total) return false;
+      const period = width + SLOT_UNITS;
+      layout.current = { period, slotAt: width + SLOT_UNITS / 2, total, repeats: Math.ceil(total / period) + 2 };
       setRepeats(layout.current.repeats);
-      // Wait for the repeated phrases and badges to be in the DOM before the first placement.
+      return true;
+    };
+    const reveal = () => {
+      // Wait for the repeated phrases and badges to be in the DOM before placing them.
       requestAnimationFrame(() => {
         if (disposed) return;
         state.ready = true;
@@ -179,10 +201,17 @@ export const CurvedTicker = ({ message, label }: Props) => {
         state.reduced = reducedQuery.matches;
         setReduced(state.reduced);
         place();
-        if (textRef.current) textRef.current.style.opacity = "1";
         sync();
       });
+    };
+    const onFontsLoaded = () => {
+      if (measure() && state.ready) requestAnimationFrame(place);
+    };
+    void document.fonts.ready.then(() => {
+      if (disposed) return;
+      if (measure()) reveal();
     });
+    document.fonts.addEventListener("loadingdone", onFontsLoaded);
 
     return () => {
       disposed = true;
@@ -190,8 +219,9 @@ export const CurvedTicker = ({ message, label }: Props) => {
       observer.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
       reducedQuery.removeEventListener("change", onReduced);
+      document.fonts.removeEventListener("loadingdone", onFontsLoaded);
     };
-  }, [message, phrase]);
+  }, [message]);
 
   const toggle = () => {
     gates.current.paused = !gates.current.paused;
@@ -210,21 +240,28 @@ export const CurvedTicker = ({ message, label }: Props) => {
           strokeWidth={BAND_WIDTH}
           className="stroke-foreground"
         />
-        <text ref={measureRef} aria-hidden xmlSpace="preserve" style={{ ...textStyle, visibility: "hidden" }}>
-          {phrase}
-        </text>
-        <text
-          ref={textRef}
-          aria-hidden
-          dy={BASELINE}
-          xmlSpace="preserve"
-          className="fill-background"
-          style={{ ...textStyle, opacity: 0 }}
-        >
-          <textPath ref={textPathRef} href={`#${pathId}`} startOffset={0}>
-            {phrase.repeat(repeats)}
-          </textPath>
-        </text>
+        {Array.from({ length: repeats }, (_, i) => (
+          <text
+            key={i}
+            ref={(node) => {
+              textRefs.current[i] = node;
+            }}
+            aria-hidden
+            dy={BASELINE}
+            className="fill-background"
+            style={{ ...textStyle, opacity: 0 }}
+          >
+            <textPath
+              ref={(node) => {
+                textPathRefs.current[i] = node;
+              }}
+              href={`#${pathId}`}
+              startOffset={0}
+            >
+              {message}
+            </textPath>
+          </text>
+        ))}
         {Array.from({ length: repeats }, (_, i) => (
           <g
             key={i}
