@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
+import { RollingText } from "@/components/ui/RollingText";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LanguageToggle } from "@/components/ui/LanguageToggle";
 import { useLang } from "@/lib/i18n";
@@ -49,9 +50,9 @@ export const Navbar = () => {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="group/roll block text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  {t(item.en, item.es)}
+                  <RollingText className="leading-[inherit]">{t(item.en, item.es)}</RollingText>
                 </a>
               </li>
             ))}

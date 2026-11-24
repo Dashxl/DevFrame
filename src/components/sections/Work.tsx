@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowUpRight, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/Reveal";
+import { RollingText } from "@/components/ui/RollingText";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { AppPhones, type AppShot } from "@/components/ui/AppPhones";
 import { DesktopShots, type DesktopShot } from "@/components/ui/DesktopShots";
@@ -387,7 +388,7 @@ export const Work = () => {
             <Reveal key={project.title}>
               <article
                 className={cn(
-                  "grid gap-8 md:items-center md:gap-14",
+                  "group/roll grid gap-8 md:items-center md:gap-14",
                   idx % 2 === 0 ? "md:grid-cols-[1.25fr_1fr]" : "md:grid-cols-[1fr_1.25fr]"
                 )}
               >
@@ -421,7 +422,9 @@ export const Work = () => {
                     <span className="mx-3 text-border">/</span>
                     {project.category}
                   </p>
-                  <h3 className="display text-3xl md:text-4xl">{project.title}</h3>
+                  <h3 className="display text-3xl md:text-4xl">
+                    <RollingText>{project.title}</RollingText>
+                  </h3>
                   <p className="mt-2 text-sm text-muted-foreground">
                     {t("Role", "Rol")}: {project.role}
                   </p>

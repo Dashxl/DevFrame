@@ -1,8 +1,12 @@
 "use client";
 
 import { Reveal } from "@/components/ui/Reveal";
+import { CurvedTicker } from "@/components/ui/CurvedTicker";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLang } from "@/lib/i18n";
+
+// The tools I use every day, as the phrase that runs along the curved ribbon.
+const tickerMessage = "FLUTTER · NEXT.JS · NODE.JS";
 
 export const Expertise = () => {
   const { t } = useLang();
@@ -104,7 +108,7 @@ export const Expertise = () => {
   ];
 
   return (
-    <section id="expertise" className="border-t border-border px-6 py-20 md:py-24">
+    <section id="expertise" className="overflow-x-clip border-t border-border px-6 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           index="02"
@@ -138,6 +142,16 @@ export const Expertise = () => {
             </Reveal>
           ))}
         </dl>
+
+        <div className="relative left-1/2 mt-12 w-screen -translate-x-1/2 md:mt-16">
+          <CurvedTicker
+            message={tickerMessage}
+            label={t(
+              "My daily tools: Flutter, Next.js and Node.js",
+              "Mis herramientas de todos los días: Flutter, Next.js y Node.js"
+            )}
+          />
+        </div>
 
         <Reveal>
           <div className="mt-14 md:mt-20">
